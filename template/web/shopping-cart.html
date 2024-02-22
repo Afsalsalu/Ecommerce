@@ -1,0 +1,125 @@
+{% extends "partials/base.html" %}
+{% load static %}
+{% load cart_tag %}
+
+{% block content %}
+{% block sidebar %}
+
+		{% endblock %}
+		<!-- shopping cart -->
+		<div class="cart_area section_padding_b">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-9">
+						<h4 class="shop_cart_title sopcart_ttl d-none d-lg-flex">
+							<span>Product</span>
+							<span>Quantity</span>
+							<span>Total Price</span>
+						</h4>
+						{% for key,value in request.session.cart.items %}
+						<div class="shop_cart_wrap">
+							
+							<div class="single_shop_cart d-flex align-items-center flex-wrap">
+								<div class="cart_img mb-4 mb-md-0">
+									<img loading="lazy" src=" {{value.image}}" alt="product" />
+								</div>
+								<div class="cart_cont">
+									<a href="product-view.html">
+										<h5>{{value.name}} </h5>
+									</a>
+									<p class="price"> {{value.price}}</p>
+									<p class="size mb-0">Size: M</p>
+								</div>
+								<div class="cart_qnty d-flex align-items-center ms-md-auto">
+									<div class="cart_qnty_btn">
+										<a href="{% url 'item_decrement' value.product_id %}">
+										<i class="las la-minus"></i>
+									</a>
+									</div>
+									<div class="cart_count">{{value.quantity}} </div>
+									<div class="cart_qnty_btn">
+										<a href="{% url 'item_increment' value.product_id %}">
+										<i class="las la-plus"></i>
+									</a>
+									</div>
+								</div>
+								<div class="cart_price ms-auto">
+									<p>₹{{ value.price|multiply:value.quantity }}</p>
+								</div>
+								<div class="cart_remove ms-auto">
+									<a href="{% url 'item_clear' key %}">
+									<i class="icon-trash"></i>
+								</a>
+								</div>
+								
+							</div>
+							
+							
+							<!-- <div class="single_shop_cart d-flex align-items-center flex-wrap">
+								<div class="cart_img mb-4 mb-md-0">
+									<img loading="lazy" src="{% static 'web/images/iphone.png' %}" alt="product" />
+								</div>
+								<div class="cart_cont">
+									<a href="product-view.html">
+										<h5>iPhone 11 Pro Max XR</h5>
+									</a>
+									<p class="price">$499.00</p>
+									<p class="size mb-0">Size: M</p>
+								</div>
+								<div class="cart_qnty d-flex align-items-center ms-md-auto">
+									<div class="cart_qnty_btn">
+										<i class="las la-minus"></i>
+									</div>
+									<div class="cart_count">1</div>
+									<div class="cart_qnty_btn">
+										<i class="las la-plus"></i>
+									</div>
+								</div>
+								<div class="cart_price ms-auto">
+									<p>$499.00</p>
+								</div>
+								<div class="cart_remove ms-auto">
+									<i class="icon-trash"></i>
+								</div>
+							</div> -->
+						</div>
+						{% endfor %}
+					</div>
+					<div class="col-lg-3 mt-4 mt-lg-0">
+						<div class="cart_summary">
+							<h4>Order Summary</h4>
+							<div class="cartsum_text d-flex justify-content-between">
+								<p class="text-semibold">Subtotal</p>
+								{% comment %} {% for key,value in request.session.cart.items %} {% endcomment %}
+								{% comment %} <p class="text-semibold">₹{{ value.price|multiply:value.quantity }}</p> {% endcomment %}
+								<p class="text-semibold">₹{{cart_total_amount}}</p>
+								
+								{% comment %} {% endfor %} {% endcomment %}
+							</div>
+							<div class="cartsum_text d-flex justify-content-between">
+								<p>Delivery</p>
+								<p>39.99</p>
+							</div>
+							<div class="cartsum_text d-flex justify-content-between">
+								<p>Tax</p>
+								<p>5</p>
+							</div>
+							<div class="cart_sum_total d-flex justify-content-between">
+								<p>Total</p>
+								<p>₹{{cart_total_amount |add:39.99 |add:5}}</p>
+							</div>
+							<div class="cart_sum_coupon">
+								<input type="text" placeholder="Enter coupon" />
+								<button>apply</button>
+							</div>
+							<div class="cart_sum_pros">
+								<a href="{% url 'checkout' %}"><button type="submit">Proccees to checkout</button></a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	
+		{% endblock  %}
+	

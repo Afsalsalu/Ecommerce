@@ -1,0 +1,42 @@
+{% extends "partials/base.html" %}
+{% load static %}
+
+{% block content %}
+{% block sidebar %}
+
+{% endblock  %}
+		<!-- breadcrumbs -->
+		<div class="container">
+			<div class="breadcrumbs">
+				<a href="#"><i class="las la-home"></i></a>
+				<a href="#" class="active">Order complete</a>
+			</div>
+		</div>
+
+		<!-- order complete -->
+		<div class="cart_area section_padding_b">
+			<div class="container">
+				<div class="row">
+					<div class="col-12">
+						<div class="row">
+							<div class="col-lg-8 mx-auto">
+								<div class="order_complete">
+									<div class="complete_icon">
+										<img style="width: 55%;  border-radius: 10px;" loading="lazy" src="https://i.pinimg.com/originals/11/2f/a0/112fa00a85cfd5c54ee10da85823dedd.gif" alt="success" />
+									</div>
+									<div class="order_complete_content">
+										<h4>Your order is completed!</h4>
+										<p>Thank you for your order! Your order is being processed and will be completed within 3-6 hours. You will receive an email confirmation when your order is completed.</p>
+										<div class="order_complete_btn">
+											<a href="{% url 'index' %}" class="default_btn rounded">continue shopping</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		{% endblock  %}

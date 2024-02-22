@@ -1,0 +1,38 @@
+
+{% extends "partials/base.html" %}
+{% load static %}
+{% block content  %}
+
+{% block sidebar %}
+
+		{% endblock  %}
+
+		<!-- breadcrumbs -->
+		<div class="container">
+			<div class="breadcrumbs">
+				<a href="#"><i class="las la-home"></i></a>
+				<a href="#" class="active">404</a>
+			</div>
+		</div>
+
+		<!-- 404 page -->
+		<div class="section_padding_b">
+			<div class="container">
+				<div class="row justify-content-center">
+					<div class="col-xl-7 col-lg-9">
+						<div class="page_nfwrap">
+							<div class="page_nfimg">
+								<img loading="lazy" src="https://i.pinimg.com/originals/e4/30/10/e430101033efff9a294eaafecbac846a.gif" class="w-100" alt="page not found" />
+								
+							</div>
+							<div class="page_nfcont text-center mt-5">
+								<h4 class="mb-4">THE PAGE YOU'VE REQUESTED IS NOT AVAILABLE</h4>
+								<a href="{% url 'index' %}" class="default_btn small rounded">back to home</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		{% endblock  %}

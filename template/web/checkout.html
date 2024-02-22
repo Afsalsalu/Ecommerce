@@ -1,0 +1,171 @@
+{% extends "partials/base.html" %}
+{% load static %}
+{% load cart_tag %}
+
+
+{% block sidebar %}
+
+		{% endblock  %}
+
+
+		{% block content %}
+
+		<!-- breadcrumbs -->
+		<div class="container">
+			<div class="breadcrumbs">
+				<a href="index-1.html"><i class="las la-home"></i></a>
+				<a href="#">Shop</a>
+				<a href="#" class="active">Checkout</a>
+			</div>
+		</div>
+
+		<!-- cart area -->
+		<div class="cart_area section_padding_b">
+			<div class="container">
+				<div class="row">
+					<div class="col-xl-8 col-lg-7 col-md-6">
+						<h4 class="shop_cart_title mb-4 ps-3">Billing details</h4>
+						<div class="billing_form">
+
+						<form action="{% url 'placeorder' %}" method="POST">
+							{% csrf_token %}
+
+
+							<div class="row">
+								<div class="col-lg-6">
+									<div class="single_billing_inp">
+										<label for="first_name">First Name <span>*</span></label>
+										<input type="text" id="first_name" name="first_name" required/>
+									</div>
+								</div>
+								<div class="col-lg-6">
+									<div class="single_billing_inp">
+										<label for="last_name">Last Name <span>*</span></label>
+										<input type ="text" id="last_name" name="last_name" required />
+									</div>
+								</div>
+								<div class="col-12">
+									<div class="single_billing_inp">
+										<label for="company_name">Company Name</label>
+										<input type="text" id="company_name" name="company" required/>
+									</div>
+								</div>
+								<div class="col-12">
+									<div class="single_billing_inp">
+										<label for="county_region">County/Region <span>*</span></label>
+										<input type="text" id="county_region" name="country" required />
+									</div>
+								</div>
+								<div class="col-12">
+									<div class="single_billing_inp">
+										<label for="street_addr">Street Address <span>*</span></label>
+										<input type="text" id="street_addr" name="address" required/>
+									</div>
+								</div>
+								<div class="col-12">
+									<div class="single_billing_inp">
+										<label for="town_city">Town/City <span>*</span></label>
+										<input type="text" id="town_city" name=" city"/>
+									</div>
+								</div>
+								<div class="col-12">
+									<div class="single_billing_inp">
+										<label for="zip_code">Zip Code <span>*</span></label>
+										<input type="text" id="zip_code" name="pincode" required/>
+									</div>
+								</div>
+								<div class="col-12">
+									<div class="single_billing_inp">
+										<label for="phone_number">Phone Number <span>*</span></label>
+										<input type="text" id="phone_number" name="phone" required/>
+									</div>
+								</div>
+								<div class="col-12">
+									<div class="single_billing_inp">
+										<label for="email_addr">Email Address <span>*</span></label>
+										<input type="text" id="email_addr" name="email" required/>
+									</div>
+								</div>
+					
+							</div>
+						</div>
+					</div>
+					<div class="col-xl-4 col-lg-5 col-md-6">
+						<h4 class="shop_cart_title ps-3">Your order</h4>
+						<div class="checkout_order mt-4">
+							<h4>product</h4>
+							{% for key,value in request.session.cart.items %}
+							<div class="single_check_order">
+							
+								<div class="checkorder_cont">
+							
+									<h5>{{value.name}} </h>
+									<p></p>
+									
+									
+								</div>
+								<p class="checkorder_qnty">x{{value.quantity}}</p>
+								<p class="checkorder_price">₹{{ value.price|multiply:value.quantity }}</p>
+								
+							</div>
+							{% endfor %}
+							
+							<div class="single_check_order">
+								{% comment %} <div class="checkorder_cont">
+									<h5>Beigh Knitted Shoes</h5>
+									<p>Color: Red</p>
+								</div> {% endcomment %}
+								{% comment %} <p class="checkorder_qnty">x2</p>
+								<p class="checkorder_price">$84.00</p> {% endcomment %}
+							</div>
+							<div class="single_check_order">
+								{% comment %} <div class="checkorder_cont">
+									<h5>Beigh Knitted Shoes</h5>
+									<p>Size: M</p>
+								</div> {% endcomment %}
+								{% comment %} <p class="checkorder_qnty">x1</p>
+								<p class="checkorder_price">$84.00</p> {% endcomment %}
+							</div>
+							<div class="single_check_order subs">
+								<div class="checkorder_cont subtotal-h">
+									<h5>Subtotal</h5>
+								</div>
+								
+								<p class="checkorder_price">₹{{cart_total_amount}}</p>
+						
+							</div>
+					
+							<div class="single_check_order subs">
+								<div class="checkorder_cont subtotal-h">
+									<h5>Shipping</h5>
+								</div>
+								<p class="checkorder_price">39.99</p>
+							</div>
+							<div class="single_check_order subs">
+								<div class="checkorder_cont subtotal-h">
+									<h5>GST</h5>
+								</div>
+								<p class="checkorder_price">5</p>
+							</div>
+							<div class="single_check_order total">
+								<div class="checkorder_cont">
+									<h5>Total</h5>
+								</div>
+								<p class="checkorder_price">₹{{cart_total_amount |add:39.99 |add:5}}</p>
+							</div>
+					 
+							<div class="checkorder_agree custom_check check_2">
+								<input type="checkbox" class="check_inp" hidden id="save-default" required />
+								<label for="save-default">Agree to our <a href="#" class="text-color">terms & conditions</a></label>
+							</div>
+
+							<div class="checkorder_btn">
+						<button type="submit" class="default_btn rounded w-100">place order</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</form>
+			</div>
+		</div>
+		{% endblock  %}

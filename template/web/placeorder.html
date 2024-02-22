@@ -1,0 +1,164 @@
+{% extends "partials/base.html" %}
+{% load static %}
+{% block sidebar %}
+			{% endblock  %}
+
+
+
+{% block content %}
+
+<form action="{% url 'create-checkout-session' %}" method="POST">
+	{% csrf_token %}
+		<!-- breadcrumbs -->
+		<div class="container">
+			<div class="breadcrumbs">
+				<a href="index-1.html"><i class="las la-home"></i></a>
+				<a href="#" class="active">Wishlist</a>
+			</div>
+		</div>
+
+		<!-- account -->
+		<div class="my_account_wrap section_padding_b">
+			<div class="container">
+				<div class="row">
+					<!--  account sidebar  -->
+					<div class="col-lg-3">
+						<div class="account_sidebar">
+							<div class="account_profile position-relative shadow_sm">
+								<div class="acprof_img">
+									<a href="account.html">
+										<img loading="lazy" src="{% static  'web/images/avatar-2.png' %}" alt="user" />
+									</a>
+								</div>
+								<div class="acprof_cont">
+									<p>Hello,</p>
+									<h4>Russell Ahmed</h4>
+								</div>
+								<div class="profile_hambarg d-lg-none d-block">
+									<i class="las la-bars"></i>
+								</div>
+							</div>
+							<div class="acprof_wrap shadow_sm">
+								<!-- <div class="acprof_links">
+									<a href="#">
+										<h4 class="acprof_link_title">
+											<i class="lar la-id-card"></i>
+											Manage My Account
+										</h4>
+									</a>
+									<a href="#">Profile Information</a>
+									<a href="#">Manage Address</a>
+									<a href="#">Change Password</a>
+								</div> -->
+								<div class="acprof_links">
+									<a href="#">
+										<h4 class="acprof_link_title">
+											<i class="las la-gift"></i>
+											My Order History
+										</h4>
+									</a>
+									<a href="#">My Returns</a>
+									<a href="#">My Cancellations</a>
+									<a href="#">My Reviews</a>
+								</div>
+								<div class="acprof_links">
+									<a href="#">
+										<h4 class="acprof_link_title">
+											<i class="lar la-credit-card"></i>
+											Payments Methods
+										</h4>
+									</a>
+									<a href="#">Voucher</a>
+								</div>
+								<!-- <div class="acprof_links">
+									<a href="#" class="active">
+										<h4 class="ac_link_title">
+											<i class="lar la-heart"></i>
+											My Wishlist
+										</h4>
+									</a>
+								</div> -->
+								<!-- <div class="acprof_links border-0">
+									<a href="login.html">
+										<h4 class="acprof_link_title">
+											<i class="las la-power-off"></i>
+											Log Out
+										</h4>
+									</a>
+								</div> -->
+							</div>
+						</div>
+					</div>
+					<!-- account content -->
+					<div class="col-lg-9">
+						
+					{% for key,value in request.session.cart.items %}
+						<div class="shop_cart_wrap wishlist">
+							
+							<div class="single_shop_cart d-flex align-items-center flex-wrap mt-0">
+								
+								<div class="cart_img mb-4 mb-md-0">
+									
+									<img loading="lazy" src="{{value.image}}" alt="product" />
+								</div>
+								
+								<div class="cart_cont">
+									
+									<a href="product-view.html"><h5>{{value.name}}</h5></a>
+									<!-- <p class="instock mb-0">Availability: <span>In Stock</span></p> -->
+								</div>
+								<div style="width: 80px; height: 30px; border: gray 1px solid;"><p style="text-align: center;">{{value.quantity}}</p></div>
+							
+								<div class="cart_price ms-md-auto ms-0">
+									
+									<p></p>
+								</div>
+								
+								<div class="wish_cart_btn ms-md-auto ms-0 mt-3 mt-md-0">
+									<!-- <button class="list_product_btn">
+										<span class="icon"><i class="icon-cart"></i></span> Add to Cart
+									</button> -->
+								</div>
+								
+								<div class="cart_remove ms-auto align-self-end align-self-md-center">
+									<!-- <i class="icon-trash"></i> -->
+								</div>
+							
+							</div>
+							
+							<!-- <div class="single_shop_cart d-flex align-items-center flex-wrap">
+								<div class="cart_img mb-4 mb-md-0">
+									<img loading="lazy" src="{% static  'web/images/keyboard.png' %}" alt="product" />
+								</div>
+								<div class="cart_cont">
+									<a href="product-view.html"><h5>HV-KB585GCM Wireless Keyboard & Mouse</h5></a>
+									<p class="instock mb-0">Availability: <span class="outstock">Out of Stock</span></p>
+								</div>
+
+								<div class="cart_price ms-md-auto ms-0">
+									<p>$95.00</p>
+								</div>
+								<div class="wish_cart_btn ms-md-auto ms-0 mt-3 mt-md-0">
+									<button class="list_product_btn disable">
+										<span class="icon"><i class="icon-cart"></i></span> Add to Cart
+									</button>
+								</div>
+								<div class="cart_remove ms-auto align-self-end align-self-md-center">
+									<i class="icon-trash"></i>
+								</div>
+							</div> -->
+							
+						</div>
+						{% endfor %}	
+						
+					</div>
+					<div class="cart_sum_pros" style="margin-top: 15px;">
+							<button type="submit">Pay Now <span style="padding: 20px;"> ₹{{cart_total_amount |add:39.99 |add:5}} </span></button>
+						
+					</div>
+					
+				</div>
+			</div>
+		</div>
+		</form>
+		{% endblock  %}
